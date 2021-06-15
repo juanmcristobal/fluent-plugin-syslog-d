@@ -1,12 +1,12 @@
 # Fluent::Plugin::D, a plugin for [Fluentd](http://fluentd.org)
 
 
-Fluent plugin to send messages to ID
+Fluent plugin to send messages to D
 
 
 ## Installation
 
-`$ fluent-gem install fluent-plugin-d`
+`$ fluent-gem install fluent-plugin-syslog-d`
 
 ## Configuration
 
@@ -24,7 +24,7 @@ Fluent plugin to send messages to ID
 
 <match test.keep.free:>
   @type devo
-  host devo_endpoint
+  host d_endpoint
   port 443
   ca_cert /path/to/chain.crt
   client_cert /path/to/<domain>.crt
@@ -46,27 +46,39 @@ to send data with fluent-plugin-d plugin, first choose the required endpoint dep
 
 | Region 	| Endpoint                  	| Port 	|
 |--------	|---------------------------	|------	|
-| USA    	| us.elb.relay.logtrust.net 	| 443  	|
-| Canada 	| ca.elb.relay.logtrust.net 	| 443  	|
-| Europe 	| eu.elb.relay.logtrust.net 	| 443  	|
-| VDC    	| es.elb.relay.logtrust.net 	| 443  	|
+| USA    	| us.elb.r.d.net 	| 443  	|
+| Canada 	| ca.elb.r.d.net 	| 443  	|
+| Europe 	| eu.elb.r.d.net 	| 443  	|
+| VDC    	| es.elb.r.d.net 	| 443  	|
 
 #### ca_cert, client_cert & client_key
 
-You need use a three files (Cert, key and chain) to secure send data to Devo. 
+You need use a three files (Cert, key and chain) to secure send data to D. 
 Administrator users can find them in **Administration** → **Credentials**, in the X.509 tab. 
 
 #### verify_cert_name
 To enable (default) or disable cert name verification.
 
-### Contact Us
 
-You can contact with us at _support@devo.com_.
+## Origin
+
+This plugin is derived from [Fluent::Plugin::SyslogTls](https://github.com/zarqman/fluent-plugin-syslog-tls).
+
+## Contact Us
+
+You can contact with us at _support@d.com_.
+
+## Contributing
+* Fork it ( https://github.com/athenahealth/fluent-plugin-newsyslog/fork )
+* Create your feature branch (git checkout -b my-new-feature)
+* Commit your changes (git commit -am 'Add some feature')
+* Push to the branch (git push origin my-new-feature)
+* Create a new Pull Request
 
 ## License
 MIT License
 
-(C) 2021 JMC.
+(C) 2021 D.Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the 'Software'), to deal in
