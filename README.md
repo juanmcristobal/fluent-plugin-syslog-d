@@ -6,7 +6,7 @@ Fluent plugin to send messages to D
 
 ## Installation
 
-`$ fluent-gem install fluent-plugin-syslog-d`
+`$ fluent-gem install fluent-plugin-d`
 
 ## Configuration
 

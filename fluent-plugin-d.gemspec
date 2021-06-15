@@ -6,7 +6,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'syslog_tls/version'
 
 Gem::Specification.new do |s|
-  s.name = "fluent-plugin-syslog-d".freeze
+  s.name = "fluent-plugin-d".freeze
   s.version = SyslogTls::VERSION
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
