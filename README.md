@@ -1,71 +1,86 @@
-# Fluent::Plugin::SyslogTls
+# Fluent::Plugin::D, a plugin for [Fluentd](http://fluentd.org)
 
-[![Gem Version](https://badge.fury.io/rb/fluent-plugin-syslog-tls.svg)](http://badge.fury.io/rb/fluent-plugin-syslog-tls)
 
-A [Fluentd](http://fluentd.org) output plugin to send logs to various Syslog collectors using TLS (only).
-
-Tested with [Papertrail](https://papertrailapp.com) and should also work with [Sumologic](https://www.sumologic.com/) and likely others.
+Fluent plugin to send messages to ID
 
 
 ## Installation
 
-```sh
-$ gem install fluent-plugin-syslog-tls
-```
-or
-```sh
-$ td-agent-gem install fluent-plugin-syslog-tls
-```
-
-Note: `fluent-plugin-syslog-tls` is compatible with Fluent 1.0 (and 0.14). For Fluent 0.12, see the `fluent-0.12` branch.
-
+`$ fluent-gem install fluent-plugin-d`
 
 ## Configuration
 
-In your Fluentd configuration, use `@type syslog_tls`. Examples:
+### Example
 
-Sumologic:
 ```
-<match **>
-  @type syslog_tls
-  host syslog.collection.us1.sumologic.com
+<source>
+  @type tcp
   port 6514
-  token 'YOUR-PRIVATE-TOKEN@IANA-ID'
-  format json
+  tag test.keep.free:
+  <parse>
+    @type "none"
+  </parse>
+</source>
+
+<match test.keep.free:>
+  @type devo
+  host devo_endpoint
+  port 443
+  ca_cert /path/to/chain.crt
+  client_cert /path/to/<domain>.crt
+  client_key /path/to/<domain>.key
+  verify_cert_name false
+
+  <format>
+      @type single_value
+      message_key message
+  </format>
 </match>
 ```
 
-Papertrail:
-```
-<match **>
-  @type syslog_tls
-  host logs1.papertrailapp.com
-  port 12345
-  format single_value
-</match>
-```
+### Parameters
 
-For more configuration options see [configuration docs](docs/configuration.md)
+#### host & port
 
+to send data with fluent-plugin-d plugin, first choose the required endpoint depending on the region your are accessing from:
 
-## Origin/History
+| Region 	| Endpoint                  	| Port 	|
+|--------	|---------------------------	|------	|
+| USA    	| us.elb.relay.logtrust.net 	| 443  	|
+| Canada 	| ca.elb.relay.logtrust.net 	| 443  	|
+| Europe 	| eu.elb.relay.logtrust.net 	| 443  	|
+| VDC    	| es.elb.relay.logtrust.net 	| 443  	|
 
-This plugin is derived from [Fluent::Plugin::SumologicCloudSyslog](https://github.com/acquia/fluent-plugin-sumologic-cloud-syslog). Changes are in the [Changelog](CHANGELOG.md).
+#### ca_cert, client_cert & client_key
 
+You need use a three files (Cert, key and chain) to secure send data to Devo. 
+Administrator users can find them in **Administration** → **Credentials**, in the X.509 tab. 
+
+#### verify_cert_name
+To enable (default) or disable cert name verification.
+
+### Contact Us
+
+You can contact with us at _support@devo.com_.
 
 ## License
+MIT License
 
-Except as otherwise noted this software is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.html)
+(C) 2021 JMC.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the 'Software'), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
-  http://www.apache.org/licenses/LICENSE-2.0
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
