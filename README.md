@@ -69,7 +69,7 @@ This plugin is derived from [Fluent::Plugin::SyslogTls](https://github.com/zarqm
 You can contact with us at _support@d.com_.
 
 ## Contributing
-* Fork it ( https://github.com/athenahealth/fluent-plugin-newsyslog/fork )
+* Fork it ( https://github.com/juanmcristobal/fluent-plugin-syslog-d/fork )
 * Create your feature branch (git checkout -b my-new-feature)
 * Commit your changes (git commit -am 'Add some feature')
 * Push to the branch (git push origin my-new-feature)
